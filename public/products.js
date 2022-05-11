@@ -15,7 +15,7 @@ function renderTitle(data) {
     const html = data.map((elem, index) => {
         return(
             `
-            <div>${elem.title}</div>
+            <div>${elem.name}</div>
             `
         )
     }).join(" ");
@@ -46,7 +46,7 @@ function renderThumbnail(data) {
 
 function addProduct(e) {
     const obj = {
-        title: document.getElementById('name').value,
+        name: document.getElementById('name').value,
         price: document.getElementById('price').value,
         thumbnail: document.getElementById('thumbnail').value 
     }

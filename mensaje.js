@@ -6,9 +6,8 @@ class Mensaje{
              if(!ifExist){
                  return knex.schema.createTable('mensajes', table => {
                     table.increments('id').primary();
-                    table.string('name');
-                    table.float('price');
-                    table.string('thumbnail');
+                    table.string('user');
+                    table.string('message');
                   })
              }
          }) .catch((err) => {
@@ -28,7 +27,7 @@ class Mensaje{
 
     async getAll(knex){
         try{
-            const view = await knex('productos').select('*')
+            const view = await knex('mensajes').select('*')
             return view;  
         }
         catch(err){

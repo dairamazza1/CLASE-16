@@ -18,19 +18,18 @@ const io = new IOServer(httpServer);
 const contenedor = require("./contenedor.js")
 const mensaje = require("./mensaje.js")
 
-const newContenedor = new contenedor('productos.txt');
-const chat = new mensaje('chat.txt');
+const newContenedor = new contenedor();
+const chat = new mensaje();
 
 //mandar al cliente 
 
 //Productos
 io.on('connection', async(socket) => {
-    const prod = await newContenedor.getAll(knexMysql).then( (obj) =>{  
+    const prod = await newContenedor.getAll(knexMysql).then( (obj) =>{
         socket.emit('products', obj);
     })
 
     socket.on('new-products', async data => {
-        console.log("producto nuevo : ",data);
         const saveObj = await newContenedor.save(knexMysql,data);
         io.sockets.emit('products', newContenedor.getAll(knexMysql));
     })
@@ -41,7 +40,6 @@ io.on('connection', async (socket) => {
         socket.emit('text', obj);
     })
     socket.on('new-text', async data => {
-        console.log("Chat nuevo : ",data);
         const saveObj = await chat.save(knexSqLite,data);
         io.sockets.emit('text', chat.getAll(knexSqLite));
     })

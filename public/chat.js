@@ -21,7 +21,6 @@ function renderChat(data) {
 }
 
 function addChat(e) {
-    console.log("entrò msj");
     const obj = {
         user: document.getElementById('email').value ,
         message: document.getElementById('text').value,
